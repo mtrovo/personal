@@ -1,23 +1,21 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'zeisch.blog.completions.create'
+title = 'zeisch.blog'
 theme = 'paper'
 
 [params]
-  color = 'linen'                           # linen, wheat, gray, light
+  color = 'wheat'                           # linen, wheat, gray, light
 
   # header social icons
   twitter = 'MTROVO'
   github = 'mtrovo'                 # github.com/YOUR_GITHUB_ID
-  instagram = 'moisestrovo'           # instagram.com/YOUR_INSTAGRAM_ID
   linkedin = 'moisestrovo'             # linkedin.com/in/YOUR_LINKEDIN_ID
   rss = true                                # show rss icon
 
-  avatar = 'moisestrovo@gmail.com'
   name = 'Moises Trovo'
   bio = 'another bunch of atoms floating around a giant fireball'
 
   # misc
   disableHLJS = true                        # disable highlight.js
-  disablePostNavigation = true              # disable post navigation
-  monoDarkIcon = true                       # show monochrome dark mode icon
+  disablePostNavigation = false              # disable post navigation
+  monoDarkIcon = true
