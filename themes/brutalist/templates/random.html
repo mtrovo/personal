@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h1>{{ section.title }}</h1>
+    {% if section.description %}
+        <p>{{ section.description }}</p>
+    {% endif %}
+    {{ section.content | safe }}
+</header>
+
+<div class="posts-list">
+    {% for page in section.pages %}
+    <article>
+
+        {% if page.date %}
+        <p class="post-date">{{ page.date | date(format="%B %e, %Y") }}</p>
+        {% endif %}
+
+        {% if page.extra.thumbnail %}
+        <div class="thumbnail" style="margin-bottom: 0.5em;">
+            <a href="{{ page.permalink | safe }}">
+                <img src="{{ get_url(path=page.extra.thumbnail) | safe }}" alt="Thumbnail for {{ page.title }}" style="max-width: 250px; height: auto; border: 1px solid #eee;">
+            </a>
+        </div>
+        {% endif %}
+        <h2 class="post-title">
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+        </h2>
+        {# The summary is generated from the content before the `<!-- more -->` separator in your .md file #}
+        <div class="post-excerpt">
+            {{ page.summary | safe }}
+        </div>
+        <a href="{{ page.permalink }}" class="button">Read more</a>
+
+    </article>
+    {% endfor %}
+</div>
+{% endblock content %}

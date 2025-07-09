@@ -1,0 +1,6 @@
+name = "Brutalist"
+description = "A brutalist theme for Zola, focused on raw functionality and stark contrasts."
+license = "MIT"
+homepage = "https://example.com"
+min_version = "0.15.0"
+author = "Moises Trovo"

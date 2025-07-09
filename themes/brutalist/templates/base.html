@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) }}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="site-header">
+            <a href='{{ get_url(path="/") }}' class="blog-title">{{ config.title }}</a>
+            <nav>
+                {% set about_page = get_page(path="about/index.md") %}
+                {# Blog Link - points to homepage #}
+                <a href='{{ get_url(path="/") }}'
+                class="{% if section and section.path == "/" %}menu-active{% endif %}">Blog</a>
+
+                {# Random Link #}
+                <a href='{{ get_url(path="@/random/_index.md") }}'
+                class="{% if current_path and current_path is starting_with('/random/') %}menu-active{% endif %}">Random</a>
+
+                {# About Link #}
+                <a href="{{ about_page.permalink }}" 
+                   class="{% if current_path == about_page.path %}menu-active{% endif %}">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            {% block content %}{% endblock content %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            &copy; {{ now() | date(format="%Y") }} {{ config.title }}. All rights reserved.
+        </footer>
+    </div>
+
+</body>
+</html>
