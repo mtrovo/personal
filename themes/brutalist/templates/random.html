@@ -11,6 +11,10 @@
     border: 1px solid #ccc;
     padding: 1rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 0;
 }
 .tile-container img {
     max-width: 100%;
@@ -49,12 +53,14 @@
                 <img src="https://placehold.co/600x400" alt="Placeholder image for {{ page.title }}">
             </a>
         {% endif %}
-        <h2 class="post-title">
-            <a href="{% if page.extra.external_link %}{{ page.extra.external_link }}{% elif page.extra.raw_html %}{{ get_url(path=page.extra.raw_html) | safe }}{% else %}{{ page.permalink }}{% endif %}" target="_blank">{{ page.title }}</a>
-        </h2>
-        {% if page.date %}
-        <p class="post-date" style="font-size: 0.8em; color: #666;">{{ page.date | date(format="%Y-%m-%d") }}</p>
-        {% endif %}
+        <div>
+            <h2 class="post-title">
+                <a href="{% if page.extra.external_link %}{{ page.extra.external_link }}{% elif page.extra.raw_html %}{{ get_url(path=page.extra.raw_html) | safe }}{% else %}{{ page.permalink }}{% endif %}" target="_blank">{{ page.title }}</a>
+            </h2>
+            {% if page.date %}
+            <p class="post-date" style="font-size: 0.8em; color: #666;">{{ page.date | date(format="%Y-%m-%d") }}</p>
+            {% endif %}
+        </div>
     </article>
     {% endfor %}
 </div>

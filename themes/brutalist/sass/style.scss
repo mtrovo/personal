@@ -1,12 +1,25 @@
+// Variables
+$font-family: "Newsreader", serif;
+$font-size: 21px;
+$background-color: #f5f5e5;
+$text-color: #000000;
+$border-color: #000000;
+$link-color: #000000;
+$link-hover-bg: #000000;
+$link-hover-color: #f5f5e5;
+$monospace-font: monospace;
+$blockquote-bg: #ffffff;
+$blockquote-border: #333;
+
 /* General Brutalist Styling */
 body {
-    font-family: "Newsreader", serif;
+    font-family: $font-family;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    font-size: 21px;
-    background-color: #f5f5e5;
-    color: #000000;
+    font-size: $font-size;
+    background-color: $background-color;
+    color: $text-color;
     line-height: 1.6;
     margin: 0;
     padding: 1rem;
@@ -22,7 +35,7 @@ body {
 
 /* Header & Footer Styling */
 .site-header, .site-footer {
-    border: 3px solid #000;
+    border: 3px solid $border-color;
     padding: 1rem;
     margin-bottom: 2rem;
     display: flex;
@@ -40,7 +53,7 @@ body {
 .blog-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000;
+    color: $link-color;
     text-decoration: none;
 }
 
@@ -48,40 +61,40 @@ body {
 nav a {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #000;
+    color: $link-color;
     text-decoration: underline;
     margin-left: 1.5rem;
     padding: 0.25rem 0.5rem;
-}
 
-nav a:hover,
-nav a.menu-active {
-    background-color: #000;
-    color: #f5f5f5;
-    text-decoration: none;
+    &:hover,
+    &.menu-active {
+        background-color: $link-hover-bg;
+        color: $link-hover-color;
+        text-decoration: none;
+    }
 }
 
 /* Main Content & Posts */
 .page-title {
     font-size: 2.5rem;
     margin-bottom: 2.5rem;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid $border-color;
     padding-bottom: 0.5rem;
 }
 
 article {
     margin-bottom: 3rem;
     padding-bottom: 2rem;
-    border-bottom: 3px solid #000;
-}
+    border-bottom: 3px solid $border-color;
 
-article:last-of-type {
-    border-bottom: none;
-    margin-bottom: 0;
+    &:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
 }
 
 .post-date {
-    font-family: monospace;
+    font-family: $monospace-font;
     font-size: 0.9rem;
     color: #333;
     margin-bottom: 0.25rem;
@@ -91,15 +104,15 @@ article:last-of-type {
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 0.5rem;
-}
 
-.post-title a {
-    color: #000;
-    text-decoration: none;
-}
+    a {
+        color: $link-color;
+        text-decoration: none;
 
-.post-title a:hover {
-    text-decoration: underline;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .post-excerpt {
@@ -110,20 +123,21 @@ article:last-of-type {
 /* Buttons & Links */
 .button {
     display: inline-block;
-    border: 3px solid #000;
+    border: 3px solid $border-color;
     padding: 0.5rem 1rem;
     text-decoration: none;
-    color: #000;
+    color: $link-color;
     background-color: rgba(255,255,255,0);
     font-weight: bold;
-    box-shadow: 4px 4px 0 0 #000; /* Hard shadow for brutalist feel */
-}
+    box-shadow: 4px 4px 0 0 $border-color; /* Hard shadow for brutalist feel */
 
-.button:hover, .button:active {
-    background-color: #000;
-    color: #f5f5f5;
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 0 #000;
+    &:hover, 
+    &:active {
+        background-color: $link-hover-bg;
+        color: $link-hover-color;
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 0 $border-color;
+    }
 }
 
 .pagination {
@@ -132,7 +146,6 @@ article:last-of-type {
 }
 
 main {
-    
     -webkit-font-smoothing: auto;
 }
 
@@ -142,19 +155,19 @@ blockquote {
     font-style: italic;
     margin: 2rem 0;
     padding: 1.5rem 2rem;
-    border-left: 5px solid #333;
-    background-color: #ffffff;
+    border-left: 5px solid $blockquote-border;
+    background-color: $blockquote-bg;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     position: relative;
-}
 
-blockquote p {
-    margin-bottom: 1rem;
-}
+    p {
+        margin-bottom: 1rem;
 
-blockquote p:last-child {
-    margin-bottom: 0;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .highlight {
