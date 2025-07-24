@@ -1,6 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+.tile-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.tile-container article {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    text-align: center;
+}
+.tile-container img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.5em;
+}
+@media (max-width: 768px) {
+    .tile-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .tile-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
 <header>
     <h1>{{ section.title }}</h1>
     {% if section.description %}
@@ -9,30 +37,24 @@
     {{ section.content | safe }}
 </header>
 
-<div class="posts-list">
+<div class="tile-container">
     {% for page in section.pages %}
     <article>
-
-        {% if page.date %}
-        <p class="post-date">{{ page.date | date(format="%B %e, %Y") }}</p>
-        {% endif %}
-
         {% if page.extra.thumbnail %}
-        <div class="thumbnail" style="margin-bottom: 0.5em;">
-            <a href="{{ page.permalink | safe }}">
-                <img src="{{ get_url(path=page.extra.thumbnail) | safe }}" alt="Thumbnail for {{ page.title }}" style="max-width: 250px; height: auto; border: 1px solid #eee;">
+            <a href="{% if page.extra.external_link %}{{ page.extra.external_link }}{% elif page.extra.raw_html %}{{ get_url(path=page.extra.raw_html) | safe }}{% else %}{{ page.permalink }}{% endif %}" target="_blank">
+                <img src="{{ get_url(path=page.extra.thumbnail) | safe }}" alt="Thumbnail for {{ page.title }}">
             </a>
-        </div>
+        {% else %}
+            <a href="{% if page.extra.external_link %}{{ page.extra.external_link }}{% elif page.extra.raw_html %}{{ get_url(path=page.extra.raw_html) | safe }}{% else %}{{ page.permalink }}{% endif %}" target="_blank">
+                <img src="https://placehold.co/600x400" alt="Placeholder image for {{ page.title }}">
+            </a>
         {% endif %}
         <h2 class="post-title">
-            <a href="{{ page.permalink }}">{{ page.title }}</a>
+            <a href="{% if page.extra.external_link %}{{ page.extra.external_link }}{% elif page.extra.raw_html %}{{ get_url(path=page.extra.raw_html) | safe }}{% else %}{{ page.permalink }}{% endif %}" target="_blank">{{ page.title }}</a>
         </h2>
-        {# The summary is generated from the content before the `<!-- more -->` separator in your .md file #}
-        <div class="post-excerpt">
-            {{ page.summary | safe }}
-        </div>
-        <a href="{{ page.permalink }}" class="button">Read more</a>
-
+        {% if page.date %}
+        <p class="post-date" style="font-size: 0.8em; color: #666;">{{ page.date | date(format="%Y-%m-%d") }}</p>
+        {% endif %}
     </article>
     {% endfor %}
 </div>
