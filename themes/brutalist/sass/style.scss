@@ -149,6 +149,15 @@ main {
     -webkit-font-smoothing: auto;
 }
 
+main pre {
+    line-height: 1;
+    font-size: 0.8em;
+    padding: 1.5em;
+}
+
+code {
+    font-size: 0.7em;
+}
 /* --- Blockquote Styles --- */
 blockquote {
     font-size: 1.3rem;

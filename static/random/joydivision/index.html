@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy Division Waves</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #000000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        /* This container will create the padding around the canvas.
+           10px top/bottom for a total of 20px vertical padding. */
+        main {
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            right: 30px;
+            bottom: 10px;
+        }
+        /* Position the controls to float over the canvas */
+        .controls {
+            position: absolute;
+            top: 30px; /* Adjusted for new padding */
+            left: 40px;
+            z-index: 10; /* Ensure controls are on top of the canvas */
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ffffff;
+            background-color: #111;
+            color: #ffffff;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ffffff;
+            background-color: #111;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <input type="text" id="seedInput" placeholder="Enter seed...">
+        <button id="actionButton">Generate</button>
+    </div>
+
+    <main id="canvas-container"></main>
+
+    <script>
+        let sketch = function(p) {
+            let time = 0;
+            let seed = Math.floor(p.random(10000));
+            let container;
+            
+            const seedInput = document.getElementById('seedInput');
+            const actionButton = document.getElementById('actionButton');
+
+            // --- Sketch Setup ---
+            p.setup = function() {
+                container = document.getElementById('canvas-container');
+                const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
+                canvas.parent(container);
+
+                p.noiseSeed(seed);
+                seedInput.value = seed;
+                console.log("Initial Seed:", seed);
+            };
+
+            // --- Main Drawing Loop ---
+            p.draw = function() {
+                p.background(0);
+
+                // --- Clipping using p.push(), p.clip(), and p.pop() ---
+                // p.push() saves the current drawing style settings and transformations
+                p.push();
+
+                // Define the clipping region
+                p.clip(() => {
+                    p.circle(p.width / 2, p.height / 2, p.height);
+                });
+
+                // The drawing code will now only be visible inside the clip area.
+                time += 0.008;
+
+                for (let y = 0; y < p.height; y += 10) {
+                    p.beginShape();
+                    p.stroke(255);
+                    p.noFill();
+                    
+                    for (let x = 0; x < p.width; x += 5) {
+                        let noiseFactor = p.noise((x * 0.005) + time, y * 0.01);
+                        
+                        let distFromCenter = p.abs(x - p.width / 2);
+                        let angle = p.map(distFromCenter, 0, p.height / 2, 0, p.PI / 2);
+                        let amplitudeMultiplier = p.pow(p.cos(angle), 2);
+                        
+                        let displacement = p.map(noiseFactor, 0, 1, -100, 100) * amplitudeMultiplier;
+                        p.vertex(x, y + displacement);
+                    }
+                    p.endShape();
+                }
+
+                // p.pop() restores the original state, removing the clip for the next frame
+                p.pop();
+            };
+            
+            // --- Window Resize Handling ---
+            p.windowResized = function() {
+                p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+            };
+
+            // --- Seed Generation and Update Logic ---
+            const generateNewSeed = () => {
+                seed = Math.floor(p.random(10000));
+                p.noiseSeed(seed);
+                seedInput.value = seed;
+                actionButton.textContent = 'Generate';
+                console.log("New Random Seed:", seed);
+            };
+
+            const updateToSeed = (newSeedValue) => {
+                const newSeed = parseInt(newSeedValue, 10);
+                if (!isNaN(newSeed) && newSeedValue.trim() !== '') {
+                    seed = newSeed;
+                    p.noiseSeed(seed);
+                    seedInput.value = seed;
+                    actionButton.textContent = 'Generate';
+                    console.log("Updated to Seed:", seed);
+                } else {
+                    generateNewSeed();
+                }
+            };
+
+            // --- Event Listeners ---
+            actionButton.addEventListener('click', () => {
+                if (actionButton.textContent === 'Generate') {
+                    generateNewSeed();
+                } else {
+                    updateToSeed(seedInput.value);
+                }
+            });
+
+            seedInput.addEventListener('input', () => {
+                if (seedInput.value.trim() !== '' && parseInt(seedInput.value, 10) !== seed) {
+                    actionButton.textContent = 'Update';
+                } else {
+                    actionButton.textContent = 'Generate';
+                }
+            });
+        };
+        
+        // Wait for the window to fully load to ensure container dimensions are calculated.
+        window.onload = () => {
+            new p5(sketch);
+        };
+    </script>
+
+</body>
+</html>

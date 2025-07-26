@@ -1,0 +1,12 @@
+---
+title: Steve Jobs The Lost Interview
+---
+
+Found out about this interview with Steve Jobs that the master was supposedly lost for a long time and released in full when finally found. The long format is a sneak peak into such a different time, he was still with NeXT and at some points during the interview very salty about the fight that forced him to leave Apple. Being able to hear what was going on in his head and his thought process at that giving time is such a blessing.
+
+<!-- more -->
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rDqQcmVqAm4?si=71PUEsqjDmrCpLCP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Some quotes:
+
+> John [Sculley] came from PepsiCo, and they, at most, would change their product once every 10 years. To them, a new product was, like, a new-size bottle, right? So if you were a product person, you couldn’t change the course of that company very much. So who influenced the success of PepsiCo? The sales and marketing people. Therefore, they were the ones that got promoted, and therefore, they were the ones that ran the company. Well, for PepsiCo, that might have been okay. But it turns out, the same thing can happen in technology companies that get monopolies. Like IBM and Xerox. <span class="highlight highlight-yellow">If you were a product person at IBM or Xerox, so you make a better copier or a better computer. So what? When you have a monopoly market share, the company is not any more successful. So the people that can make the company more successful are sales and marketing people, and they end up running the companies.</span> And the product people get driven out of the decision-making forums. And the companies forget what it means to make great products. The product sensibility and the product genius that brought them to that monopolistic position gets rotted out by people running these companies who have no conception of a good product versus a bad product. They have no conception of the craftsmanship that’s required to take a good idea and turn it into a good product. And they really have no feeling in their hearts usually about wanting to really help the customers
